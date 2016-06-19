@@ -59,9 +59,8 @@ Created by shaddy on 26.05.16.
             </div>
           </div>
           <ion-list>
-            <ion-item ng-repeat="item in balances | orderBy:'-date' ">
-              Amo: {{item.amount}},
-              Bal: {{item.balance}}<br>Diff: {{item.difference}},<br>Rate: {{item.rate}}
+            <ion-item ng-repeat="item in balances | orderBy:'-date'">
+              <div ng-class="{income:item.amount &gt; 0}">Amo: {{item.amount}},</div>Bal: {{item.balance}},<br>Diff: {{item.difference}},<br>Rate: {{item.rate}}
             </ion-item>
           </ion-list>
         </ion-content>

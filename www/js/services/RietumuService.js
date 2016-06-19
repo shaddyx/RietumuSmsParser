@@ -39,8 +39,6 @@ app.service("RietumuService", ["SmsService", function(SmsService){
             amount:1,
             currency:"",
             store:"unknown",
-            fop:"",
-            city:"",
             balance:0,
             balanceCurrency:"",
             date:sms.date_sent
@@ -54,14 +52,7 @@ app.service("RietumuService", ["SmsService", function(SmsService){
         result.amount = parseFloat(matches[2]);
         result.currency = matches[3];
         console.log("amount parsed");
-        if (lines[index].indexOf(">") === -1){
-            result.store = lines[index++];
-            console.log("store added:", result.store);
-        }
-        var storeChunks = lines[index++].split(">");
-        result.fop = storeChunks[0];
-        result.city = storeChunks[1];
-        console.log("fop, city added:", result.fop, result.city);
+        result.store = lines[index++];
         console.log(lines, index, result);
         var matches = lines[index++].match(balanceRe);
         result.balance = parseFloat(matches[1]);

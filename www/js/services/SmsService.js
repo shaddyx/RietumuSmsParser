@@ -15,15 +15,6 @@ app.service("SmsService", ["$rootScope", "$q", function($rootScope, $q){
     var fakeSms = function(amount, balance){
         this.counter = this.counter || 0;
         var date = this.counter++;
-        //" 9725 -8000.00 UAH↵3A GRISHKA STR>KIEV UA↵Balance = 2747.54 USD"
-        /*list.push({
-            text: id + " " + amount + " UAH\n" +
-            "name\n" +
-            "fop>city\n" +
-            "UA\n" +
-            "Balance = " + balance + "USD\n"
-        });*/
-
         list.push({
             text: " 9256 " + amount + " UAH\n3A GRISHKA STR>KIEV UA\nBalance = " + balance + " USD",
             date_sent: date,

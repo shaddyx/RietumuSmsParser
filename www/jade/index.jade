@@ -43,9 +43,10 @@ html(lang="en")
               +button("button-dark")(ng-click="refresh()")
                 | Refresh
           ion-list
-            ion-item(ng-repeat="item in balances | orderBy:'-date' ")
-              | Amo: {{item.amount}},
-              | Bal: {{item.balance}}
+            ion-item(ng-repeat="item in balances | orderBy:'-date'")
+              div(ng-class="{income:item.amount > 0}")
+                | Amo: {{item.amount}},
+              | Bal: {{item.balance}},
               br
               | Diff: {{item.difference}},
               br
