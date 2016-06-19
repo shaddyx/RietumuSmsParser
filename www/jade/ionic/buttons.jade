@@ -1,0 +1,19 @@
+mixin button(type)
+    //-
+        possible classes:
+        button-light
+        button-stable
+        button-positive
+        button-calm
+        button-balanced
+        button-energized
+        button-assertive
+        button-royal
+        button-dark
+    - if (type == undefined) {
+    -   type = "";
+    - }
+    - type = "button " + type
+
+    button(class!=type)&attributes(attributes)
+        block
