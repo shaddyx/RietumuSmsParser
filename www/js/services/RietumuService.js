@@ -5,7 +5,7 @@
 app.service("RietumuService", ["SmsService", function(SmsService){
     var my = this;
     //9725 -770.00UAH
-    var amountRe = new RegExp("([0-9]+) ([-]*[0-9\\.]+) ([A-Z]+)");
+    var amountRe = new RegExp("([-+]*[0-9\\.]+) ([A-Z]+)");
     var balanceRe = new RegExp("Balance \\= ([-]*[0-9\\.]+) ([A-Z]+)");
     this.parse = function(){
         console.log("retrieving sms list");
@@ -48,9 +48,8 @@ app.service("RietumuService", ["SmsService", function(SmsService){
         var lines = sms.text.split("\n");
         var index = 0;
         var matches = lines[index++].match(amountRe);
-        result.unknownId = parseInt(matches[1]);
-        result.amount = parseFloat(matches[2]);
-        result.currency = matches[3];
+        result.amount = parseFloat(matches[1]);
+        result.currency = matches[2];
         console.log("amount parsed");
         result.store = lines[index++];
         console.log(lines, index, result);

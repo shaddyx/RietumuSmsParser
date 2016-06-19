@@ -60,7 +60,8 @@ Created by shaddy on 26.05.16.
           </div>
           <ion-list>
             <ion-item ng-repeat="item in balances | orderBy:'-date'">
-              <div ng-class="{income:item.amount &gt; 0}">Amo: {{item.amount}} {{item.currency}},</div>Bal: {{item.balance}} {{item.balanceCurrency}},<br>Diff: {{item.difference}} {{item.balanceCurrency}},<br>Rate: {{item.rate}}
+              <div ng-class="{income:item.amount &gt; 0}">Amo: {{item.amount}} {{item.currency}}, Bal: {{item.balance}} {{item.balanceCurrency}},</div>
+              <div ng-show="item.amount &lt; 0">Diff: {{item.difference}} {{item.balanceCurrency}},<br>Rate: {{item.rate}}</div>
             </ion-item>
           </ion-list>
         </ion-content>

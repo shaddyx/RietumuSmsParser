@@ -15,18 +15,27 @@ app.service("SmsService", ["$rootScope", "$q", function($rootScope, $q){
     var fakeSms = function(amount, balance){
         this.counter = this.counter || 0;
         var date = this.counter++;
-        list.push({
-            text: " 9256 " + amount + " UAH\n3A GRISHKA STR>KIEV UA\nBalance = " + balance + " USD",
-            date_sent: date,
-            read:1
-        });
+        if (amount > 0){
+            //"+3851.40 USD↵279282 RIETUMU BANKA AKCIJU SABIEDRIBA, ANATOLII YAKUSHKO, ↵Balance = 4592.41 USD"
+            list.push({
+                text: " " + amount + " USD\n279282 RIETUMU BANKA AKCIJU SABIEDRIBA, SERGII SIMENTSOV, \nBalance = " + balance + " USD",
+                date_sent: date,
+                read:1
+            });
+        } else {
+            list.push({
+                text: " 9256 " + amount + " UAH\n3A GRISHKA STR>KIEV UA\nBalance = " + balance + " USD",
+                date_sent: date,
+                read:1
+            });
+        }
     };
     if (browser){
         //
         //  add some fake data if runned on browser
         //  only for testing
         //
-        fakeSms(500000, 10000);
+        fakeSms(50000, 10000);
         fakeSms(-1000, 1000);
         fakeSms(-20000, 900);
         fakeSms(-10000, 800);
