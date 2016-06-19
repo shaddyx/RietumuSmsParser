@@ -45,10 +45,10 @@ html(lang="en")
           ion-list
             ion-item(ng-repeat="item in balances | orderBy:'-date'")
               div(ng-class="{income:item.amount > 0}")
-                | Amo: {{item.amount}},
-              | Bal: {{item.balance}},
+                | Amo: {{item.amount}} {{item.currency}},
+              | Bal: {{item.balance}} {{item.balanceCurrency}},
               br
-              | Diff: {{item.difference}},
+              | Diff: {{item.difference}} {{item.balanceCurrency}},
               br
               | Rate: {{item.rate}}
 
