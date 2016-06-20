@@ -2,8 +2,8 @@
  * Created by shaddy on 26.05.16.
  */
 
-app.controller("RietumuSmsParserMainController", ["$scope", "SmsService", "$interval", "RietumuService", "$rootScope",
-    function($scope, SmsService, $interval, RietumuService, $rootScope){
+app.controller("RietumuSmsParserMainController", ["$scope", "SmsService", "$interval", "RietumuService", "$rootScope", "SettingsService",
+    function($scope, SmsService, $interval, RietumuService, $rootScope, SettingsService){
     $scope.smsList = SmsService.getSmsList();
     $scope.refresh = function(){
         console.log("refreshing");
@@ -19,5 +19,9 @@ app.controller("RietumuSmsParserMainController", ["$scope", "SmsService", "$inte
     $rootScope.$on("smsArrive", function (){
         $scope.refresh();
     });
+
+    $interval(function(){
+        $scope.settings = SettingsService.getSettings();
+    }, 100);
 
 }]);

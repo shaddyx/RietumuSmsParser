@@ -71,16 +71,29 @@ app.service("RietumuService", ["SmsService", function(SmsService){
                  * @param list {ParsedSms}
                  */
                 function(list){
+                    var result = {
+                        list:list,
+                        averageRate:0,
+                        ratedCount:0,
+                        maxRate:undefined,
+                        minRate:undefined
+                    };
                     for (var k in list){
                         if (k!=0){
                             list[k].difference = list[k].balance - list[k - 1].balance;
                             list[k].rate = list[k].amount / list[k].difference;
+                            result.averageRate += list[k].rate;
+                            result.ratedCount ++;
+                            result.maxRate = (result.maxRate === undefined ? list[k].rate : Math.max(list[k].rate, result.maxRate));
+                            result.minRate = (result.minRate === undefined ? list[k].rate : Math.min(list[k].rate, result.minRate));
+
                         } else {
                             list[k].difference = 0;
                             list[k].rate = 0;
                         }
                     }
-                    return list;
+                    result.averageRate = result.averageRate / result.ratedCount;
+                    return result;
                 }
             )
     };

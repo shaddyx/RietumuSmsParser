@@ -58,24 +58,30 @@ Created by shaddy on 26.05.16.
               </button>
             </div>
           </div>
+          <div class="row">
+            <div class="col">Avg rate: {{balances.averageRate.toFixed(4)}}</div>
+            <div class="col">Min rate: {{balances.minRate.toFixed(4)}}</div>
+            <div class="col">Max rate: {{balances.maxRate.toFixed(4)}}</div>
+          </div>
           <ion-list>
-            <ion-item ng-repeat="item in balances | orderBy:'-date'">
+            <ion-item ng-repeat="item in balances.list | orderBy:'-date'">
               <div ng-class="{income:item.amount &gt; 0}">Amo: {{item.amount}} {{item.currency}}, Bal: {{item.balance}} {{item.balanceCurrency}},</div>
-              <div ng-show="item.amount &lt; 0">Diff: {{item.difference}} {{item.balanceCurrency}},<br>Rate: {{item.rate}}</div>
+              <div ng-show="item.amount &lt; 0">
+                <div class="diff">Diff: {{item.difference}} {{item.balanceCurrency}},</div>
+                <div class="rate">Rate: {{item.rate}}</div>
+              </div>
+              <div ng-show="settings.showLocations" class="location">{{item.store}}</div>
             </ion-item>
           </ion-list>
         </ion-content>
       </ion-tab>
-      <ion-tab title="Settings">
+      <ion-tab title="Settings" ng-controller="SettingsController">
         <ion-header-bar class="bar-header bar bar-stable">
           <h1 class="title">Settings
           </h1>
         </ion-header-bar>
-        <ion-content>Coming soon
-          <!--ion-checkbox(ng-model="isChecked")
-          | Checkbox Label
-          
-          -->
+        <ion-content>
+          <ion-checkbox ng-model="settings.showLocations">Show locatons</ion-checkbox>
         </ion-content>
       </ion-tab>
     </ion-tabs>

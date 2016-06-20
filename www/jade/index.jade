@@ -42,22 +42,33 @@ html(lang="en")
             .center
               +button("button-dark")(ng-click="refresh()")
                 | Refresh
+          .row
+            .col
+              |Avg: {{balances.averageRate.toFixed(4)}}
+            .col
+              | Min rate: {{balances.minRate.toFixed(4)}}
+            .col
+              | Max rate: {{balances.maxRate.toFixed(4)}}
           ion-list
-            ion-item(ng-repeat="item in balances | orderBy:'-date'")
+            ion-item(ng-repeat="item in balances.list | orderBy:'-date'")
               div(ng-class="{income:item.amount > 0}")
                 | Amo: {{item.amount}} {{item.currency}}, Bal: {{item.balance}} {{item.balanceCurrency}},
               div(ng-show="item.amount < 0")
-                | Diff: {{item.difference}} {{item.balanceCurrency}},
-                br
-                | Rate: {{item.rate}}
+                .diff
+                  | Diff: {{item.difference}} {{item.balanceCurrency}},
+                .rate
+                  | Rate: {{item.rate}}
+              div.location(ng-show="settings.showLocations")
+                  | {{item.store}}
 
-      ion-tab(title="Settings")
+
+      ion-tab(title="Settings", ng-controller="SettingsController")
         +headerBar
           | Settings
         ion-content
-          |Coming soon
-          //ion-checkbox(ng-model="isChecked")
-            | Checkbox Label
+          ion-checkbox(ng-model="settings.showLocations")
+            | Show locatons
+
 
     +cordovaJs
 

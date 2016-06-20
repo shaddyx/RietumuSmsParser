@@ -3,18 +3,17 @@
  */
 app.service("SettingsService", ["$interval", function($interval){
     var my = this;
-    var SETTINGS_KEY = "rietumuParser";
+    var SETTINGS_KEY = "applicationSettings";
     var SAVE_INTERVAL = 100;
     var settings = {};
-    var defaultSettings = {
-        lastWordsToStore: 100
-    };
+    var defaultSettings = {};
     
     this.getSettings = function(){
         return settings;
     };
 
     this.save = function(){
+        debugger;
         if (window.localStorage){
             window.localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
         }
@@ -26,6 +25,7 @@ app.service("SettingsService", ["$interval", function($interval){
         } else {
             settings = defaultSettings;
         }
+        return settings;
     };
 
     this.load();
