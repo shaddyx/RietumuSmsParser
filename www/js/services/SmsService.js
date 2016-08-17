@@ -2,7 +2,7 @@
  * Created by shaddy on 07.06.16.
  */
 /** @typedef {{id:number, date:number, date_sent:number, text: string, from: string}} SMS */
-app.service("SmsService", ["$rootScope", "$q", function($rootScope, $q){
+app.service("SmsService", ["$rootScope", "$q", "PermissionsService", function($rootScope, $q, PermissionsService){
     var browser = device.platform === "browser";
     if (! SMS ) { alert( 'SMS plugin not ready' ); return; }
     /** @type {{text:string, from:string}[]} */
@@ -51,33 +51,48 @@ app.service("SmsService", ["$rootScope", "$q", function($rootScope, $q){
      * @returns {Promise}
      */
     this.getSmsList = function(){
-        var deferred = $q.defer();
-        if (!browser){
-            console.log("Getting real sms list");
-            SMS.listSMS(filter, function(data){
-                console.log("list received");
-                list = [];
-                for (var k = data.length - 1; k >= 0; k --){
-                    var sms = data[k];
-                    console.log("Incoming sms:", sms);
-                    list.push({
-                        read:sms.read,
-                        id:sms._id,
-                        date:sms.date,
-                        date_sent:sms.date_sent,
-                        from:sms.address.trim(),
-                        text:sms.body.trim()
-                    });
-                }
+        var func = function(){
+            var deferred = $q.defer();
+            if (!browser){
+                console.log("Getting real sms list");
+                SMS.listSMS(filter, function(data){
+                    console.log("list received");
+                    list = [];
+                    for (var k = data.length - 1; k >= 0; k --){
+                        var sms = data[k];
+                        console.log("Incoming sms:", sms);
+                        list.push({
+                            read:sms.read,
+                            id:sms._id,
+                            date:sms.date,
+                            date_sent:sms.date_sent,
+                            from:sms.address.trim(),
+                            text:sms.body.trim()
+                        });
+                    }
+                    deferred.resolve(list);
+                },function(error){
+                    console.error("Error receiving sms", error);
+                    deferred.reject(error);
+                });
+            } else {
                 deferred.resolve(list);
-            },function(error){
-                console.error("Error receiving sms", error);
-                deferred.reject(error);
-            });
-        } else {
-            deferred.resolve(list);
-        }
-        return deferred.promise;
+            }
+            return deferred.promise;
+        };
+        return PermissionsService.hasPermission(PermissionsService.permissions.READ_SMS).then(function(res){
+            if (res){
+                return func();
+            } else {
+                return PermissionsService.requestPermission(PermissionsService.permissions.READ_SMS).then(function(res){
+                    if(res) {
+                        return func();
+                    } else {
+                        throw new Error("Permission disabled: READ_SMS");
+                    }
+                })
+            }
+        });
     };
 
     var filter = {

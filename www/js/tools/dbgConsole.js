@@ -45,3 +45,9 @@ window.onerror = function(message, url, lineNumber) {
     dbgConsole.add("Error: " + message + " in " + url + " at line " + lineNumber);
     //dbgConsole.oldOnError && dbgConsole.oldOnError.apply(arguments);
 };
+
+app.factory('$exceptionHandler', ['$log', function($log) {
+    return function myExceptionHandler(exception, cause) {
+        dbgConsole.add("Angular Error: " + exception + ":" + cause);
+    };
+}]);
