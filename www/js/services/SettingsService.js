@@ -13,7 +13,6 @@ app.service("SettingsService", ["$interval", function($interval){
     };
 
     this.save = function(){
-        debugger;
         if (window.localStorage){
             window.localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
         }

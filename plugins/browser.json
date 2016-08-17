@@ -7,25 +7,25 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "ua.org.shaddy.tools.rietumuparser"
-        },
-        "cordova-plugin-http": {
+        "cordova-plugin-device": {
             "PACKAGE_NAME": "ua.org.shaddy.tools.rietumuparser"
         },
         "cordova-plugin-file": {
             "PACKAGE_NAME": "ua.org.shaddy.tools.rietumuparser"
         },
-        "cordova-plugin-device": {
+        "cordova-plugin-http": {
             "PACKAGE_NAME": "ua.org.shaddy.tools.rietumuparser"
         },
         "cordova-plugin-sms": {
+            "PACKAGE_NAME": "ua.org.shaddy.tools.rietumuparser"
+        },
+        "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "ua.org.shaddy.tools.rietumuparser"
         }
     },
     "dependent_plugins": {
         "cordova-plugin-compat": {
-            "PACKAGE_NAME": "ua.org.shaddy.hello"
+            "PACKAGE_NAME": "ua.org.shaddy.tools.rietumuparser"
         }
     }
 }

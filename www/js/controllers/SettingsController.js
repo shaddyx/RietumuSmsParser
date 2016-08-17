@@ -3,7 +3,6 @@
  */
 
 app.controller("SettingsController", ["$scope", "SettingsService", function($scope, SettingsService){
-    debugger;
     /**
      *
      * @type {{showLocations:boolean}}

@@ -16,10 +16,10 @@
         "cordova-plugin-http": {
             "PACKAGE_NAME": "ua.org.shaddy.tools.rietumuparser"
         },
-        "cordova-plugin-whitelist": {
+        "cordova-plugin-sms": {
             "PACKAGE_NAME": "ua.org.shaddy.tools.rietumuparser"
         },
-        "cordova-plugin-sms": {
+        "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "ua.org.shaddy.tools.rietumuparser"
         }
     },
